@@ -1,89 +1,88 @@
-// src/components/SearchPage.jsx
 import React, { useState } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_KEY = 'd646e054c1823c4ffb54373b69954e66'; 
+// Chave da API Corrigida para d646e054c1823d4ffb54373b69954e66
+const API_KEY = 'd646e054c1823d4ffb54373b69954e66';
 const API_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const SearchPage = () => {
-  const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(null);
+    const [query, setQuery] = useState('');
+    const [results, setResults] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+    const [hasSearched, setHasSearched] = useState(false);
 
-  const handleSearch = async (e) => {
-    e.preventDefault();
+    // Função para buscar filmes quando o utilizador submete a pesquisa
+    const handleSearch = async (e) => {
+        e.preventDefault();
+        if (!query.trim()) return;
 
-    if (query.trim() === '') {
-      setResults([]);
-      return;
-    }
+        setLoading(true);
+        setError(null);
+        setHasSearched(true);
 
-    try {
-      setLoading(true);
-      setError(null);
+        try {
+            const response = await axios.get(
+                `${API_URL}/search/movie?api_key=${API_KEY}&language=pt-BR&query=${query}&page=1&include_adult=false`
+            );
+            setResults(response.data.results);
+        } catch (err) {
+            setError('Falha ao buscar resultados. Verifique a chave da API e a conexão.');
+            console.error('Erro na pesquisa:', err);
+        } finally {
+            setLoading(false);
+        }
+    };
 
-      // RF02: Chamada ao endpoint de busca
-      const response = await axios.get(
-        `${API_URL}/search/movie?api_key=${API_KEY}&language=pt-BR&query=${query}`
-      );
+    return (
+        <div className="search-container" style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+            <h1>Pesquisar Filmes</h1>
+            
+            <form onSubmit={handleSearch} style={{ marginBottom: '30px', display: 'flex', gap: '10px' }}>
+                <input
+                    type="text"
+                    value={query}
+                    onChange={(e) => setQuery(e.target.value)}
+                    placeholder="Digite o título do filme..."
+                    style={{ flexGrow: 1, padding: '10px', borderRadius: '5px', border: '1px solid #ccc' }}
+                />
+                <button 
+                    type="submit"
+                    style={{ padding: '10px 20px', borderRadius: '5px', border: 'none', backgroundColor: '#333', color: 'white', cursor: 'pointer' }}
+                >
+                    Pesquisar
+                </button>
+            </form>
 
-      // Filtra resultados sem poster
-      const filteredResults = response.data.results.filter(
-        (item) => item.poster_path && item.media_type !== 'person'
-      );
-      setResults(filteredResults);
-    } catch (err) {
-      setError('Falha ao buscar. Tente novamente mais tarde.');
-      console.error(err);
-    } finally {
-      setLoading(false);
-    }
-  };
+            {loading && <div style={{ textAlign: 'center', padding: '20px' }}>Carregando resultados...</div>}
+            {error && <div style={{ color: 'red', textAlign: 'center', padding: '20px' }}>Erro: {error}</div>}
 
-  return (
-    <div className="search-container" style={{ padding: '20px' }}>
-      <form onSubmit={handleSearch} style={{ marginBottom: '30px', textAlign: 'center' }}>
-        <input
-          type="text"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="Busque por título de filme ou série..."
-          style={{ width: '80%', padding: '10px', fontSize: '1.2em', borderRadius: '5px', border: '1px solid #ccc' }}
-        />
-        <button type="submit" style={{ padding: '10px 20px', fontSize: '1.2em', marginLeft: '10px', backgroundColor: '#007bff', color: 'white', border: 'none', borderRadius: '5px', cursor: 'pointer' }}>
-          Buscar
-        </button>
-      </form>
-
-      {loading && <div style={{ textAlign: 'center' }}>Carregando resultados...</div>}
-      {error && <div style={{ color: 'red', textAlign: 'center' }}>Erro: {error}</div>}
-
-      <div className="results-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-        {results.map((movie) => (
-          <Link key={movie.id} to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="movie-card" style={{ width: '200px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <img
-                src={`${IMAGE_BASE_URL}${movie.poster_path}`}
-                alt={movie.title}
-                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-              />
-              <div style={{ padding: '10px' }}>
-                <h3 style={{ fontSize: '1em', margin: '5px 0' }}>{movie.title || movie.name}</h3>
-                <p style={{ fontSize: '0.8em', margin: '0' }}>Avaliação: {movie.vote_average.toFixed(1)}</p>
-              </div>
+            {hasSearched && !loading && !error && results.length === 0 && (
+                <div style={{ textAlign: 'center', padding: '20px' }}>Nenhum resultado encontrado para "{query}".</div>
+            )}
+            
+            {/* Exibição dos Resultados */}
+            <div className="results-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px', justifyContent: 'center' }}>
+                {results.map((movie) => (
+                    <Link key={movie.id} to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <div className="movie-card" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.1)', borderRadius: '10px', overflow: 'hidden', transition: 'transform 0.2s', backgroundColor: '#fff' }}>
+                            <img
+                                src={movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : 'https://placehold.co/200x300/ccc/333?text=Sem+Poster'}
+                                alt={movie.title}
+                                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                            />
+                            <div style={{ padding: '10px' }}>
+                                <h3 style={{ fontSize: '1.1em', margin: '5px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{movie.title}</h3>
+                                <p style={{ fontSize: '0.9em', margin: '0', color: '#555' }}>Lançamento: {movie.release_date || 'N/A'}</p>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
             </div>
-          </Link>
-        ))}
-        
-        {!loading && !error && query.trim() !== '' && results.length === 0 && (
-          <p style={{ marginTop: '50px' }}>Nenhum resultado encontrado para "{query}".</p>
-        )}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default SearchPage;

@@ -1,68 +1,74 @@
-// src/components/MovieList.jsx
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-const API_KEY = 'd646e054c1823c4ffb54373b69954e66'; 
+// Chave da API CORRIGIDA para d646e054c1823d4ffb54373b69954e66
+const API_KEY = 'd646e054c1823d4ffb54373b69954e66';
 const API_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const MovieList = () => {
-  const [movies, setMovies] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+    // Definimos o tipo como 'popular' para ser a página inicial
+    const [movies, setMovies] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [error, setError] = useState(null);
 
-  useEffect(() => {
-    const fetchMovies = async () => {
-      try {
-        setLoading(true);
-        // RF01: Busca os filmes "Em Alta" (Trending)
-        const response = await axios.get(
-          `${API_URL}/trending/movie/week?api_key=${API_KEY}&language=pt-BR`
-        );
-        setMovies(response.data.results);
-        setError(null);
-      } catch (err) {
-        setError('Falha ao buscar filmes. Verifique a chave da API.');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    useEffect(() => {
+        const fetchMovies = async () => {
+            try {
+                setLoading(true);
+                setError(null);
 
-    fetchMovies();
-  }, []);
+                // Busca filmes populares, que é o conteúdo esperado para a Home
+                const url = `${API_URL}/movie/popular?api_key=${API_KEY}&language=pt-BR&page=1`;
 
-  if (loading) {
-    return <div style={{ textAlign: 'center', padding: '20px' }}>Carregando filmes em alta...</div>;
-  }
+                const response = await axios.get(url);
+                setMovies(response.data.results);
+            } catch (err) {
+                // Mensagem de erro clara para o utilizador
+                setError('Falha ao carregar a lista de Filmes Populares. Verifique a chave da API.');
+                console.error('Erro ao buscar filmes populares:', err);
+            } finally {
+                setLoading(false);
+            }
+        };
 
-  if (error) {
-    return <div style={{ color: 'red', textAlign: 'center', padding: '20px' }}>Erro: {error}</div>;
-  }
+        fetchMovies();
+    }, []);
 
-  return (
-    <div className="container" style={{ padding: '20px' }}>
-      <h2>Filmes Populares desta Semana</h2>
-      <div className="movie-grid" style={{ display: 'flex', flexWrap: 'wrap', gap: '20px', justifyContent: 'center' }}>
-        {movies.map((movie) => (
-          <Link key={movie.id} to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-            <div className="movie-card" style={{ width: '200px', boxShadow: '0 4px 8px rgba(0,0,0,0.1)', borderRadius: '8px', overflow: 'hidden' }}>
-              <img
-                src={`${IMAGE_BASE_URL}${movie.poster_path}`}
-                alt={movie.title}
-                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
-              />
-              <div style={{ padding: '10px' }}>
-                <h3 style={{ fontSize: '1em', margin: '5px 0' }}>{movie.title}</h3>
-                <p style={{ fontSize: '0.8em', margin: '0' }}>Avaliação: {movie.vote_average.toFixed(1)}</p>
-              </div>
+    if (loading) {
+        return <div style={{ textAlign: 'center', padding: '50px', fontSize: '1.2em' }}>A carregar Filmes Populares...</div>;
+    }
+
+    if (error) {
+        return <div style={{ color: 'red', textAlign: 'center', padding: '50px', border: '1px solid red', borderRadius: '5px', backgroundColor: '#fee' }}>Erro: {error}</div>;
+    }
+
+    return (
+        <div className="movie-list-container" style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
+            <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>Filmes Populares Hoje</h1>
+            
+            {/* Grid de Filmes */}
+            <div className="movie-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px', justifyContent: 'center' }}>
+                {movies.map((movie) => (
+                    // Link para a página de detalhes do filme
+                    <Link key={movie.id} to={`/movie/${movie.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                        <div className="movie-card" style={{ boxShadow: '0 4px 12px rgba(0,0,0,0.1)', borderRadius: '10px', overflow: 'hidden', transition: 'transform 0.2s', backgroundColor: '#fff' }}>
+                            <img
+                                src={movie.poster_path ? `${IMAGE_BASE_URL}${movie.poster_path}` : 'https://placehold.co/200x300/ccc/333?text=Sem+Poster'}
+                                alt={movie.title}
+                                style={{ width: '100%', height: '300px', objectFit: 'cover' }}
+                            />
+                            <div style={{ padding: '10px' }}>
+                                <h3 style={{ fontSize: '1.1em', margin: '5px 0', overflow: 'hidden', textOverflow: 'ellipsis', whiteSpace: 'nowrap' }}>{movie.title}</h3>
+                                <p style={{ fontSize: '0.9em', margin: '0', color: '#555' }}>Avaliação: {movie.vote_average.toFixed(1)}</p>
+                            </div>
+                        </div>
+                    </Link>
+                ))}
             </div>
-          </Link>
-        ))}
-      </div>
-    </div>
-  );
+        </div>
+    );
 };
 
 export default MovieList;
