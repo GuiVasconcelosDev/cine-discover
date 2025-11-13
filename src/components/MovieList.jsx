@@ -2,13 +2,12 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-// Chave da API CORRIGIDA para d646e054c1823d4ffb54373b69954e66
 const API_KEY = 'd646e054c1823d4ffb54373b69954e66';
 const API_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const MovieList = () => {
-    // Definimos o tipo como 'popular' para ser a página inicial
+    //página inicial
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
