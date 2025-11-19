@@ -1,0 +1,71 @@
+/* Estilos Base para o Corpo */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+    color: #333;
+    line-height: 1.6;
+}
+
+/* Estilos da Navegação (Header) */
+.header {
+    background-color: #333;
+    color: white;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.header h1 {
+    margin: 0;
+    font-size: 1.8em;
+}
+
+.nav a {
+    color: white;
+    text-decoration: none;
+    margin-left: 20px;
+    font-size: 1.1em;
+    transition: color 0.3s;
+}
+
+.nav a:hover {
+    color: #aaa;
+}
+
+/* ------------------------------------------------ */
+/* NOVAS REGRAS DE RESPONSIVIDADE (MOBILE FIRST) */
+/* ------------------------------------------------ */
+
+/* Por defeito, a nav já está em linha, mas vamos ajustar o espaço para mobile */
+@media (max-width: 600px) {
+    
+    .header {
+        flex-direction: column; /* Empilha logo e navegação */
+        padding: 10px;
+    }
+
+    .header h1 {
+        margin-bottom: 10px;
+    }
+
+    .nav {
+        display: flex;
+        justify-content: space-around; /* Distribui os links */
+        width: 100%;
+    }
+
+    .nav a {
+        margin: 0 5px; /* Reduz o espaço entre links */
+        font-size: 1em;
+    }
+
+    /* Estilo para garantir que o layout de grid fica apenas uma coluna em mobile */
+    .movie-grid {
+        grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important; 
+        gap: 10px !important;
+    }
+}

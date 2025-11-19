@@ -2,12 +2,13 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
+// Chave da API
 const API_KEY = 'd646e054c1823d4ffb54373b69954e66';
 const API_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
 
 const MovieList = () => {
-    //página inicial
+    // Definimos o tipo como 'popular' para ser a página inicial
     const [movies, setMovies] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
@@ -23,10 +24,10 @@ const MovieList = () => {
 
                 const response = await axios.get(url);
                 setMovies(response.data.results);
-            } catch (err) {
+            } catch (error) {
                 // Mensagem de erro clara para o utilizador
-                setError('Falha ao carregar a lista de Filmes Populares. Verifique a chave da API.');
-                console.error('Erro ao buscar filmes populares:', err);
+                setError('Falha ao carregar a lista de Filmes Populares. Por favor, verifique a ligação à internet ou a chave da API.');
+                console.error('Erro ao buscar filmes populares:', error);
             } finally {
                 setLoading(false);
             }
@@ -45,9 +46,9 @@ const MovieList = () => {
 
     return (
         <div className="movie-list-container" style={{ padding: '20px', maxWidth: '1200px', margin: '0 auto' }}>
-            <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>Filmes Populares Hoje</h1>
+            <h1 style={{ marginBottom: '30px', textAlign: 'center' }}>Filmes Populares Hoje!</h1>
             
-            {/* Grid de Filmes */}
+            {/* Grid de Filmes - Agora a responsividade é tratada pela classe CSS. */}
             <div className="movie-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(200px, 1fr))', gap: '20px', justifyContent: 'center' }}>
                 {movies.map((movie) => (
                     // Link para a página de detalhes do filme
