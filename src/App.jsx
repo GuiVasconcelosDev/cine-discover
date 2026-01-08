@@ -7,12 +7,12 @@ import MovieDetails from './components/MovieDetails';
 import ActorDetails from './components/ActorDetails';
 import DiscoveryPage from './components/DiscoveryPage';
 import SearchPage from './components/SearchPage';
-import './App.css'; // Opcional: Para estilos globais
+import './App.css';
 
 function App() {
   return (
     <>
-      <header style={{ backgroundColor: '#333', padding: '15px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+      <header style={{ backgroundColor: '#181515d2', padding: '10px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
         {/* Link para a Home/Página Inicial */}
         <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
           <h1>CineDiscover</h1>

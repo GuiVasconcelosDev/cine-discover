@@ -1,4 +1,4 @@
-/* Estilos Base para o Corpo */
+
 body {
     font-family: Arial, sans-serif;
     margin: 0;
@@ -8,7 +8,7 @@ body {
     line-height: 1.6;
 }
 
-/* Estilos da Navegação (Header) */
+
 .header {
     background-color: #333;
     color: white;
@@ -36,15 +36,13 @@ body {
     color: #aaa;
 }
 
-/* ------------------------------------------------ */
-/* NOVAS REGRAS DE RESPONSIVIDADE (MOBILE FIRST) */
-/* ------------------------------------------------ */
 
-/* Por defeito, a nav já está em linha, mas vamos ajustar o espaço para mobile */
 @media (max-width: 600px) {
     
     .header {
-        flex-direction: column; /* Empilha logo e navegação */
+        flex-direction: column;
+        gap: 10px;
+        text-align: center;
         padding: 10px;
     }
 
