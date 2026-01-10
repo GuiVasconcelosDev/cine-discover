@@ -37,13 +37,14 @@ body {
 }
 
 
-@media (max-width: 600px) {
+@media (max-width: 700px) {
     
     .header {
         flex-direction: column;
         gap: 10px;
         text-align: center;
         padding: 10px;
+        
     }
 
     .header h1 {
@@ -59,6 +60,7 @@ body {
     .nav a {
         margin: 0 5px; 
         font-size: 1em;
+
     }
 
     

@@ -17,9 +17,9 @@ function App() {
           <h1>CineDiscover</h1>
         </Link>
         <nav>
-          <Link to="/" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }} class="cx" id="caixa1">Home</Link>
-          <Link to="/search" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }} class="cx" id="caixa2">Buscar</Link>
-          <Link to="/discover" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }} class="cx" id="caixa3">Descobrir</Link>
+          <Link to="/"  class="cx" id="caixa1">Home</Link>
+          <Link to="/search"  class="cx" id="caixa2">Buscar</Link>
+          <Link to="/discover"  class="cx" id="caixa3">Descobrir</Link>
         </nav>
       </header>
 
