@@ -12,15 +12,14 @@ import './App.css';
 function App() {
   return (
     <>
-      <header style={{ backgroundColor: '#181515d2', padding: '10px', color: 'white', display: 'flex', justifyContent: 'space-between', alignItems: 'center', flexWrap: 'wrap' }}>
-        {/* Link para a Home/Página Inicial */}
+      <header>
         <Link to="/" style={{ textDecoration: 'none', color: 'white' }}>
           <h1>CineDiscover</h1>
         </Link>
         <nav>
-          <Link to="/" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }}>Home</Link>
-          <Link to="/search" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }}>Buscar</Link>
-          <Link to="/discover" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }}>Descobrir</Link>
+          <Link to="/" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }} class="cx">Home</Link>
+          <Link to="/search" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }} class="cx">Buscar</Link>
+          <Link to="/discover" style={{ color: 'white', margin: '0 15px', textDecoration: 'none' }} class="cx">Descobrir</Link>
         </nav>
       </header>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 
-// Chave da API
+
 const API_KEY = 'd646e054c1823d4ffb54373b69954e66';
 const API_URL = 'https://api.themoviedb.org/3';
 const IMAGE_BASE_URL = 'https://image.tmdb.org/t/p/w500';
@@ -69,7 +69,6 @@ const DiscoveryPage = () => {
         marginBottom: '30px',
         display: 'flex',
         gap: '20px',
-        // A lógica de responsividade define a direção e o alinhamento
         flexDirection: isMobile ? 'column' : 'row', 
         alignItems: isMobile ? 'flex-start' : 'center',
     };
@@ -78,7 +77,7 @@ const DiscoveryPage = () => {
         padding: '8px',
         borderRadius: '5px',
         border: '1px solid #ccc',
-        minWidth: isMobile ? '100%' : '200px', // Ocupa a largura total no mobile
+        minWidth: isMobile ? '100%' : '200px', 
     };
 
     return (

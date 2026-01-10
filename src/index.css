@@ -52,20 +52,19 @@ body {
 
     .nav {
         display: flex;
-        justify-content: space-around; /* Distribui os links */
+        justify-content: space-around;
         width: 100%;
     }
 
     .nav a {
-        margin: 0 5px; /* Reduz o espaço entre links */
+        margin: 0 5px; 
         font-size: 1em;
     }
 
-    /* Estilo para garantir que o layout de grid fica apenas uma coluna em mobile */
+    
     .movie-grid {
         grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)) !important; 
         gap: 10px !important;
 
-        /* Correcao final de deploy */
     }
 }
