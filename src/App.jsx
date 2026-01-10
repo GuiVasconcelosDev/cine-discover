@@ -24,7 +24,6 @@ function App() {
       </header>
 
       <main>
-        {/* Definição das Rotas */}
         <Routes>
           <Route path="/" element={<MovieList />} /> 
           <Route path="/search" element={<SearchPage />} /> 

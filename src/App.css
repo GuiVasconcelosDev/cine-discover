@@ -1,17 +1,18 @@
 #root {
-  max-width: 1280px;
+  max-width: 1920px;
   margin: 0 auto;
   padding: 2rem;
   text-align: center;
 }
 header {
   background-color: #181515d2;
-  padding: 10px;
+  padding: 25px 25px -25px;
   color: white;
   display: flex;
   justify-content: 'space-between';
   align-items: center;
   flex-wrap: wrap;
+
 }
 
 .logo {
@@ -53,6 +54,10 @@ header {
 .cx {
   border: 1px solid rgb(228, 6, 73);
   border-radius: 3px;
-  padding: 10px;
+  padding: 5px 5px 3px;
+  max-width: 600px;
+  
+  
   background-image: url('https://th.bing.com/th/id/OIP.UbQ-S3DVKCvlFWmqM6XFxgHaEK?w=266&h=180&c=7&r=0&o=7&dpr=1.3&pid=1.7&rm=3');
 }
+

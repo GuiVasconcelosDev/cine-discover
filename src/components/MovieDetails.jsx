@@ -16,9 +16,8 @@ const MovieDetails = () => {
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 600); // Novo estado
 
     useEffect(() => {
-        // Lógica de adaptação de ecrã
         const handleResize = () => {
-            setIsMobile(window.innerWidth <= 600);
+            setIsMobile(window.innerWidth <= 700);
         };
 
         window.addEventListener('resize', handleResize);
