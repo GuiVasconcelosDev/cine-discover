@@ -72,17 +72,19 @@ body {
 }
 footer {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    text-align: center;
 
 }
 footer > a {
     background-image: linear-gradient(to left #FF0000, #EE82EE transparent);
     border: 2px solid;
-    padding: 3px;
+    padding: 2px;
     text-decoration: none;
     width: 100px;
     border-radius: 3px;
 }
 footer > a:hover {
     background-image: url('https://i0.wp.com/picjumbo.com/wp-content/uploads/glowing-abstract-lines-wallpaper-free-image.jpg?w=600&quality=80');
-    color: black;
+    color: rgba(244, 0, 0, 0.59);
+    border: solid rgba(0, 0, 255, 0.682);
 }
