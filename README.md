@@ -1,16 +1,32 @@
-# React + Vite
+# 🎬 Cine Discover
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+O **Cine Discover** é uma aplicação web interativa que permite aos usuários explorar o universo cinematográfico, consultando informações detalhadas sobre filmes, elencos e avaliações em tempo real.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 🚀 Demonstração
+O projeto está publicado e pode ser acessado aqui: 
+**[https://cine-discover.vercel.app/]**
 
-## React Compiler
+## 🛠️ Tecnologias Utilizadas
+- **Linguagem:** JavaScript (ES6+)
+- **Estilização:** CSS3 / HTML5
+- **Consumo de Dados:** [TMDB API]
+- **Deploy:** Vercel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## 📌 Funcionalidades
+- [x] Listagem de filmes populares e lançamentos.
+- [x] Busca por títulos específicos.
+- [x] Exibição de detalhes: sinopse, nota/avaliação e elenco.
+- [x] Filtro por categorias/gêneros.
+- [x] Design responsivo (funciona no celular e desktop).
 
-## Expanding the ESLint configuration
+## 💡 Aprendizados
+Neste projeto, foquei em praticar:
+1. **Manipulação de DOM:** Para renderizar os filmes dinamicamente.
+2. **Fetch API:** Para lidar com requisições assíncronas e tratamento de erros.
+3. **Local Storage (Opcional):** [*].
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🔧 Como rodar o projeto localmente
+1. Clone o repositório: `git clone https://github.com/seu-usuario/cine-discover.git`
+2. Abra o arquivo `index.html` no seu navegador (ou use o Live Server).
